@@ -2,6 +2,7 @@ package cn.ifxcode.project.main.config;
 
 import cn.ifxcode.project.interceptor.DictionaryInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -18,5 +19,14 @@ public class DictionaryConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new DictionaryInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowedOrigins("*");
+        super.addCorsMappings(registry);
     }
 }

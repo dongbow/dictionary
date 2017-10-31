@@ -16,7 +16,7 @@ class dict extends Component {
   static getPropsFromStores(){
     let state = IndexStore.getState();
     return {
-      word : state.word
+      dictionary : state.dictionary
     }
   }
 
@@ -24,7 +24,7 @@ class dict extends Component {
     return(
       <div>
         <span>词典</span>
-        {this.props.word}
+        {this.props.dictionary}
       </div>
     )
   }

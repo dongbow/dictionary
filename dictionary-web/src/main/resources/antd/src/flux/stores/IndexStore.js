@@ -3,20 +3,20 @@ import IndexAction from 'actions/IndexAction.js';
 
 class DictStore {
 
-  constructor(){
+  constructor() {
     this.bindListeners({
       handleDictSearch: IndexAction.dictSearch,
       handleTranslate: IndexAction.translate
     });
-    this.state={
-      word: null,
+    this.state = {
+      dictionary: null,
       translate: null
     }
   }
 
   handleDictSearch = (word) => {
     if (word) {
-
+      
     }
   }
 

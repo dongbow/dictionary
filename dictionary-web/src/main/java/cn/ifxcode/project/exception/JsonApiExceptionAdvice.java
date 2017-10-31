@@ -4,6 +4,7 @@ import cn.ifxcode.project.bean.Result;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,19 +18,19 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2017/10/20
  */
 @Slf4j
-@ControllerAdvice(value = {"cn.ifxcode.project.controller.json"})
+@ControllerAdvice(basePackages = {"cn.ifxcode.project.controller.json"})
 public class JsonApiExceptionAdvice {
 
     @ExceptionHandler({ServiceException.class})
     public ResponseEntity processServiceException(ServiceException e) {
-        Result res = genErrorInfo(500, e.getCode(), e.getMessage());
+        Result res = genErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getCode(), e.getMessage());
         log.warn(e.getMessage(), e);
         return ResponseEntity.ok(res);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity processIllegalArgumentException(IllegalArgumentException e) {
-        Result res = genErrorInfo(400, "ILLEGAL_ARGUMENT", e.getMessage());
+        Result res = genErrorInfo(HttpStatus.BAD_REQUEST.value(), "ILLEGAL_ARGUMENT", e.getMessage());
         log.warn(e.getMessage(), e);
         return ResponseEntity.ok(res);
     }
@@ -37,7 +38,7 @@ public class JsonApiExceptionAdvice {
     @ExceptionHandler
     public ResponseEntity defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         log.error(e.getMessage(), e);
-        Result res = genErrorInfo(500, "INTERNAL_SERVER_ERROR", "服务器异常");
+        Result res = genErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", "服务器异常");
         return ResponseEntity.ok(res);
     }
 

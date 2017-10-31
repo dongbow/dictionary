@@ -17,7 +17,7 @@ class index extends Component {
   static getPropsFromStores(){
     let state = IndexStore.getState();
     return {
-      word: state.word,
+      dictionary : state.dictionary,
       translate: state.translate
     }
   }
