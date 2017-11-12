@@ -60,7 +60,7 @@ public class HttpGetUtils extends HttpClientUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(HttpGetUtils.getInstance().doGet("https://api.shanbay.com/bdc/search/?word=word"));
+        System.out.println(HttpGetUtils.getInstance().doGet("https://api.shanbay.com/bdc/search/?word=english"));
     }
 
 }

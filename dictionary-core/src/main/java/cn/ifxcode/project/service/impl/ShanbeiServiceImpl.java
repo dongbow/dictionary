@@ -43,6 +43,7 @@ public class ShanbeiServiceImpl implements DictionaryService {
             String result = HttpUtil.GET.doGet(MessageFormat.format(shanbeiUrl, word));
             Assert.notNull(result, "查询失败");
             ShanbeiDTO shanbeiDTO = ShanbeiDTO.fromJSON(result);
+            Assert.notNull(shanbeiDTO, "查询失败");
             dictionaryVO = DictionaryVO.convert(shanbeiDTO);
         } catch (Exception e) {
             log.error("from shanbei get word failed, word: {}", word, e);
